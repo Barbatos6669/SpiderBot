@@ -1,4 +1,4 @@
-l#include <Servo.h>
+#include <Servo.h>
 
 void idle();
 void walkCycle();
@@ -11,6 +11,10 @@ Servo servoTesting;
 
 int angle = 0;
 int speedControl = 0;
+
+int xValue;
+int yValue;
+int swPin;
 
 // Arduino pin numbers
 const int SW_pin = 2; // digital pin connected to switch output
@@ -30,7 +34,11 @@ void setup()
 
 void loop()
 {
-
+  xValue = analogRead(X_pin);
+  Serial.print("xValue:");
+  Serial.print(xValue);
+  Serial.println();
+  delay(1000);
 }
 
 void idle()
