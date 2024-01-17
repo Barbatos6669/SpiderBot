@@ -34,10 +34,25 @@ void setup()
 
 void loop()
 {
+  speedControl = 0;
   xValue = analogRead(X_pin);
-  Serial.print("xValue:");
+  Serial.print("xValue: ");
   Serial.print(xValue);
   Serial.println();
+
+  if (xValue == 0)
+  {
+   Serial.print("Spider is walking Forward");
+  }
+  else if (xValue == 1023)
+  {
+    Serial.print("Spider is walking Backwards");
+  }
+  else 
+  {
+    Serial.print("Spider is in idle mode");
+  }
+  
   delay(1000);
 }
 
