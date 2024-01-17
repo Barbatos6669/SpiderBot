@@ -32,29 +32,40 @@ void setup()
   Serial.begin(9600);
 }
 
-void loop()
+void loop() 
 {
-  speedControl = 0;
   xValue = analogRead(X_pin);
+  yValue = analogRead(Y_pin);
+  swPin = digitalRead(SW_pin);
+
+  // Example deadzone implementation
+  int deadzone = 50;
+  int midPoint = 512;
+
   Serial.print("xValue: ");
   Serial.print(xValue);
   Serial.println();
 
-  if (xValue == 0)
-  {
-   Serial.print("Spider is walking Forward");
-  }
-  else if (xValue == 1023)
-  {
+  if (xValue < midPoint - deadzone) {
+    Serial.print("Spider is walking Forward");
+    walkForward();
+  } else if (xValue > midPoint + deadzone) {
     Serial.print("Spider is walking Backwards");
-  }
-  else 
-  {
+    walkBackwards();
+  } else if (yValue < midPoint - deadzone) {
+    Serial.print("Spider is rotating right");
+    rotateRight();
+  } else if (yValue > midPoint + deadzone) {
+    Serial.print("Spider is rotating left");
+    rotateLeft();
+  } else {
     Serial.print("Spider is in idle mode");
+    idle();
   }
-  
+
   delay(1000);
 }
+
 
 void idle()
 {
