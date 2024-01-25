@@ -34,10 +34,10 @@ const int Y_pin = 1; // analog pin connected to Y output
 void setup()
 {
   //Servo code
-  servo1.attach(11); //gpt suggested pwn only, will need to long in to this
-  servo2.attach(10);
-  servo3.attach(9);
-  servo4.attach(6);
+  servo1.attach(2); //gpt suggested pwn only, will need to long in to this
+  servo2.attach(3);
+  servo3.attach(4);
+  servo4.attach(5);
 
   servo1.write(0);
   servo2.write(0);
@@ -77,10 +77,10 @@ void loop()
     rotateLeft();
   } else {
     Serial.print("Spider is in idle mode");
-    idle(180,0,180,0);
+    idle(90,90,90,90);
   }
 
-  delay(1000);
+  delay(200);
 }
 
 
@@ -94,7 +94,7 @@ void idle(int servo1Angle,  int servo2Angle, int servo3Angle, int servo4ZAngle)
 
 void walkCycle()
 {
-
+     
 }
 
 void rotateRight()
@@ -109,7 +109,21 @@ void rotateLeft()
 
 void walkForward()
 {
-
+  servo1.write(180);
+  delay(200);
+  servo4.write(90);
+  delay(200);
+  servo2.write(180);
+  delay(200);
+  servo3.write(90);
+  delay(200);
+  servo1.write(90);  
+  delay(200);
+  servo4.write(0);
+  delay(200);
+  servo2.write(90);
+  delay(200);
+  servo3.write(0);
 }
 
 void walkBackwards()
